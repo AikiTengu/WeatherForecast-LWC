@@ -1,0 +1,17 @@
+<template>
+    <lightning-card title="Weather Forecast" icon-name="action:preview">
+
+        	<div style="font-size: medium; font-weight: bold; margin-bottom: 0px;">{city}</div>
+	    	<div style="width: 130px">
+		    	<div style="display: block; clear: left;">
+					<div style="display: block; clear: left; font-size: medium; font-weight: bold;"
+						title="Current Temperature">Temperature: {temp}</div>
+					<div style="display: block; width: 85px; overflow: visible;"></div>
+				</div>
+		    	<div style="display: block; clear: left; color: gray; font-size: x-small;">Humidity: {humidity}</div>
+		    	<div style="display: block; clear: left; color: gray; font-size: x-small;">Pressure: {pressure} hpa</div>
+			</div>
+			<p>{errors}</p>
+
+    </lightning-card>
+</template>
