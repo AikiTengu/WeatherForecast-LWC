@@ -3,8 +3,9 @@ import getCity from "@salesforce/apex/AccountLocationManager.getCity";
 import getWeatherByCity from "@salesforce/apex/AccountWeatherConsumer.getWeatherByCity"; 
 export default class WeatherForecast extends LightningElement {	
     APIKEY = '9c9350d7547dca5651483d1e364cc1fa';
-    //getting account id from url
-    accountId=window.location.href.split('/')[6];
+    //getting accountId
+    @api recordId;
+
 	city;	
     weather;
     temp;
@@ -14,9 +15,10 @@ export default class WeatherForecast extends LightningElement {
     clouds;
 
 
-    @wire(getCity, { accountId: '$accountId'})
+    @wire(getCity, { accountId: '$recordId'})
     wireCity({error, data}){
         if (data) {
+            console.log(this.recordId);
             this.city = data;
         }
         if (error) {
