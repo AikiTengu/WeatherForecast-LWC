@@ -1,11 +1,14 @@
 public with sharing class AccountWeatherConsumer {
-
 	@AuraEnabled(cacheable=true)
 	public static Object getWeatherByCity(String city) {
 		Http http = new Http();
 		HttpRequest request = new HttpRequest();
 		WeatherAPI__mdt weatherMetaData = WeatherMetadataController.getWeatherMetaData();
-		String endpoint = weatherMetaData.URL__c + String.escapeSingleQuotes(city) + weatherMetaData.Params__c + weatherMetaData.Key__c;
+		String endpoint =
+			weatherMetaData.URL__c +
+			String.escapeSingleQuotes(city) +
+			weatherMetaData.Params__c +
+			weatherMetaData.Key__c;
 		request.setEndpoint(endpoint);
 		request.setMethod('GET');
 
