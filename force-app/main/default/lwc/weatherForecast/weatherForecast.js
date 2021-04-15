@@ -25,10 +25,10 @@ export default class WeatherForecast extends LightningElement {
     }
 
     @wire(getWeatherByCity, {city: '$city'})
-    wireWeatherPOJO({error, data}) {
+    wireWeatherDTO({error, data}) {
         if (data) {
             this.weather = data;
-            this.temp=this.weather.temp;
+            this.temp=this.weather.temperature;
             this.humidity=this.weather.humidity;
             this.pressure=this.weather.pressure;
         }
