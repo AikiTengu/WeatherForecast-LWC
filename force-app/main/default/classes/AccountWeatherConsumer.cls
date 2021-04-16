@@ -14,35 +14,15 @@ public with sharing class AccountWeatherConsumer {
 
 		try {
 			HttpResponse response = http.send(request);
-			// If the request is successful, parse the JSON response.
-			// parse the JSON response
 
-			WeatherDTO weatherResult = new WeatherDTO();
+			weatherDTO weatherResult = new weatherDTO();
 			Object weatherREST;
 			if (response.getStatusCode() == 200) {
-				Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
-				weatherREST = result.get('main');
-			}
-			if (weatherREST != null) {
-				Map<String, Object> weatherMain = (Map<String, Object>) JSON.deserializeUntyped(
-					JSON.serialize(weatherREST)
-				);
-				weatherResult.humidity = (Integer)weatherMain.get('humidity');
-				weatherResult.pressure = (Integer)weatherMain.get('pressure');
-				weatherResult.temperature = (Double)weatherMain.get('temp');
+				weatherResult = weatherDTO.parse(response.getBody());
 			}
 			return weatherResult;
 		} catch (Exception e) {
 			throw new AuraHandledException(e.getMessage());
 		}
-	}
-
-	public class WeatherDTO {
-		@AuraEnabled
-		public Integer pressure;
-		@AuraEnabled
-		public Integer humidity;
-		@AuraEnabled
-		public Double temperature;
 	}
 }
