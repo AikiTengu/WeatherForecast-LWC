@@ -14,9 +14,7 @@ public with sharing class AccountWeatherConsumer {
 
 		try {
 			HttpResponse response = http.send(request);
-
 			weatherDTO weatherResult = new weatherDTO();
-			Object weatherREST;
 			if (response.getStatusCode() == 200) {
 				weatherResult = weatherDTO.parse(response.getBody());
 			}
